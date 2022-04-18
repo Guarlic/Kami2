@@ -24,13 +24,12 @@
     "import/no-dynamic-require": 0,
     "no-console": 0,
     "no-trailing-spaces": 0,
-    "indent": 0,
     "no-plusplus": 0,
     "max-classes-per-file": 0,
-    "lines-between-class-members": 0,
     "no-useless-constructor": 1,
     "no-unused-vars": 1,
     "import/extensions": 0,
-    "import/no-unresolved": 0
+    "import/no-unresolved": 0,
+    "prefer-destructuring": 0
   }
 }
