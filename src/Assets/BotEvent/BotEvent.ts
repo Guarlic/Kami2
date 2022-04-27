@@ -6,9 +6,9 @@ export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-export async function Start(dburl: string) {
+export async function Start() {
   logger.info(`Bot Start`);
-  DBManager.Connect(dburl);
+  DBManager.Connect(process.env.TOKEN!);
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -19,5 +19,5 @@ export async function MsgRecv(msg: Message) {
 
   logger.info(`MsgRecv by ${msg.author.username}: ${msg.content}`);
 
-  DBManager.FindUserData();
+  DBManager.FindUserData(msg.author.id);
 }

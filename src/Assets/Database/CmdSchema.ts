@@ -1,31 +1,24 @@
-import mongoose from 'mongoose';
+import typegoose from '@typegoose/typegoose';
 
-// 커맨드 스키마
+const { prop, getModelForClass } = typegoose;
 
-const cmdSchema = new mongoose.Schema({
-  CmdName: {
-    type: String,
-    require: true,
-  },
-  output: {
-    type: String,
-    require: true,
-  },
-  react: {
-    type: String,
-  },
-  owneroutput: {
-    type: String,
-  },
-  ownerreact: {
-    type: String,
-  },
-  customcmd: {
-    type: String,
-  },
-});
+class Cmd {
+  @prop({ required: true })
+  public id!: string;
 
-// CmdSchema.set('toJSON',{ getters : true })
-const CmdSchema = mongoose.model('Cmd', cmdSchema);
+  @prop({ required: true })
+  public GemDate!: Date;
 
-export default { CmdSchema };
+  @prop({ type: String, required: true })
+  public gems!: Map<String, String>;
+
+  @prop({ required: true })
+  public money!: number;
+
+  @prop({ required: true, default: Date.now() })
+  public JoinDate!: Date;
+}
+
+const CmdModel = getModelForClass(Cmd);
+
+export default CmdModel;

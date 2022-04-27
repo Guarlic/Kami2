@@ -8,7 +8,7 @@ dotenv.config();
 
 const client = BotEvent.client;
 
-client.once('ready', () => BotEvent.Start(process.env.DBURL!));
+client.once('ready', () => BotEvent.Start());
 
 client.on('messageCreate', async (msg: Message) => {
   return BotEvent.MsgRecv(msg);

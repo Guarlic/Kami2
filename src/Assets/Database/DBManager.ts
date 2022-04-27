@@ -4,7 +4,7 @@ import CmdSchema from './CmdSchema.js';
 import UserSchema from './UserSchema.js';
 
 export function Connect(dburl: string) {
-  return mongoose
+  mongoose
     .connect(dburl, {
       maxPoolSize: 10, // Maintain up to 10 socket connections
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
@@ -12,11 +12,11 @@ export function Connect(dburl: string) {
     })
     .then(() => logger.info('==> MongoDB Connected...'))
     .catch(err => logger.error(err));
-}
 
-export async function FindUserData() {
   mongoose.connection.on('disconnected', Connect);
 }
+
+export async function FindUserData(userid: string) {}
 
 export async function FindCmdData() {}
 

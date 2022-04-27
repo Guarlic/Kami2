@@ -1,35 +1,18 @@
-import mongoose from 'mongoose';
+import typegoose from '@typegoose/typegoose';
 
-const Schema = mongoose.Schema;
+const { prop, getModelForClass } = typegoose;
 
-// 커맨드 스키마
+class User {
+  @prop()
+  public CmdName!: string;
 
-// 유저 보유중 보석 목록
-const gemSchema = new mongoose.Schema({ any: [] });
+  @prop()
+  public output!: string;
 
-// 유저 데이터 스키마
-const userSchema = new mongoose.Schema(
-  {
-    _id: Schema.Types.ObjectId,
-    username: {
-      type: String,
-      require: true,
-    },
-    gems: {
-      type: [gemSchema],
-      default: [],
-    },
-    joined: {
-      type: Boolean,
-      require: true,
-    },
-    todaysgem: { type: Date },
-    gemtime: { type: Date },
-  },
-  { timestamps: true, minimize: false },
-);
+  @prop()
+  public react?: string;
+}
 
-// UserSchema.set('toJSON',{ getters : true })
-const UserSchema = mongoose.model('User', userSchema);
+const UserModel = getModelForClass(User);
 
-export default { UserSchema };
+export default UserModel;
