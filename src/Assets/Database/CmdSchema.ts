@@ -2,23 +2,21 @@ import typegoose from '@typegoose/typegoose';
 
 const { prop, getModelForClass } = typegoose;
 
-class Cmd {
-  @prop({ required: true })
-  public id!: string;
+export class CmdClass {
+  @prop()
+  public CmdName!: string;
 
-  @prop({ required: true })
-  public GemDate!: Date;
+  @prop()
+  public output!: string;
 
-  @prop({ type: String, required: true })
-  public gems!: Map<String, String>;
+  @prop()
+  public react?: string;
 
-  @prop({ required: true })
-  public money!: number;
+  @prop()
+  public informerid!: string;
 
-  @prop({ required: true, default: Date.now() })
-  public JoinDate!: Date;
+  @prop()
+  public informernametag!: string;
 }
 
-const CmdModel = getModelForClass(Cmd);
-
-export default CmdModel;
+export const CmdModel = getModelForClass(CmdClass);
