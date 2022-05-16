@@ -13,7 +13,7 @@ export class UserClass {
   // public GemTimeDate?: Date;
 
   @prop({ type: String, required: true, default: new Map<String, String>() })
-  public gems!: Map<String, String>;
+  public gems!: Map<string, string>;
 
   @prop({ required: true, default: 0 })
   public money!: number;
