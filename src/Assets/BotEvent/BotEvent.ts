@@ -14,7 +14,7 @@ import * as DBManager from '../Database/DBManager.js';
 import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 
-const prefix = '꺠미야';
+const prefix = '테베야';
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -95,7 +95,7 @@ export async function MsgRecv(msg: Message) {
 
 /**
  * 주석 개귀찮, 쨋든 인터랙션 감지 함수
- * @param interaction 인터랙션 넘기셈 알아서 눈치껏
+ * @param interaction 인터랙션 넘기셈 알아서 눈치껏 ALZALTAKALSEN
  */
 export async function InterAcRecv(interaction: Interaction) {
   logger.info(interaction);

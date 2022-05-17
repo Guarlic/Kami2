@@ -28,7 +28,7 @@ async function execute(msg: Message, Cmdelement: string[]) {
       // 없으면 없는뎂쇼? 라고 답하기
       if (result[0] === null || result[0] === undefined) {
         return msg.reply(
-          `제 머릿속을 샅샅이 뒤져봤지만 ${msg.author.username}님이 알려주신 ${Cmdelement[1]}이란건 없는뎁쇼?`,
+          `제 머릿속을 샅샅이 뒤져봤지만 ${msg.author.username}님이 알려주신 '${Cmdelement[1]}'이란건 없는뎁쇼?`,
         );
       }
 
@@ -38,9 +38,15 @@ async function execute(msg: Message, Cmdelement: string[]) {
       // 옵션들 배열에 넣기
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       result.forEach((i: any) => {
+        let description = '';
+        if (i.output.length > 97) {
+          description = `${i.output.substring(0, 97)}...`;
+        } else {
+          description = i.output;
+        }
         optionArray.push({
           label: i.CmdName,
-          description: i.output,
+          description,
           // eslint-disable-next-line no-underscore-dangle
           value: `${i._id}`,
         });
