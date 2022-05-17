@@ -10,20 +10,26 @@ import * as DBManager from '../Database/DBManager.js';
 async function execute(msg: Message, Cmdelement: string[]) {
   // 널체크
   if (Cmdelement[1] == null || undefined) {
-    msg.reply(`Element 1번이 주어지지 않았습니다.`);
+    msg.reply(`인자 1번을 내놓으시라우!`);
     return;
   }
 
   // 널체크2
   if (Cmdelement[2] == null || undefined) {
-    msg.reply(`Element 2번이 주어지지 않았습니다.`);
+    msg.reply(`인자 2번 빨랑 주세여!!!!!!!!`);
+    return;
+  }
+
+  // 1000자 블럭걸음
+  if (msg.content.substring(msg.content.indexOf(Cmdelement[2])).length > 500) {
+    msg.reply('어엇? 오백자가 넘네여? 제가 이해하기엔 너무 어려운거 가태영...');
     return;
   }
 
   // 커맨드 추가 가즈아!
   await DBManager.AddCmd(
     Cmdelement[1],
-    msg.content.substring(msg.content.search(Cmdelement[2])),
+    msg.content.substring(msg.content.indexOf(Cmdelement[2])),
     msg.author.id,
     `${msg.author.username}#${msg.author.discriminator}`,
   )
