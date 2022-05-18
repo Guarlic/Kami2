@@ -8,13 +8,14 @@ import {
   MessageEmbed,
   EmbedFooterData,
   Interaction,
+  EmbedAuthorData,
 } from 'discord.js';
 import { logger } from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
 import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 
-const prefix = '테베야';
+const prefix = '뉴꺠미야';
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -76,10 +77,15 @@ export async function MsgRecv(msg: Message) {
         };
 
         // 임베드 뚝딱해서
+        const authordata: EmbedAuthorData = {
+          name: '킴꺠미',
+          iconURL: EmbedConfig.author.iconURL,
+        };
+
         const embed = new MessageEmbed()
           .setColor(EmbedConfig.color)
           .setTitle(Cmdelement[0])
-          .setAuthor(EmbedConfig.author)
+          .setAuthor(authordata)
           .setDescription(result[resultnum].output)
           .setFooter(footerdata);
 

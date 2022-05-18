@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Message } from 'discord.js';
-import learn from './learn.js';
+import teach from './teach.js';
 import forget from './forget.js';
 import achievement from './achievement.js';
 
@@ -9,7 +9,7 @@ const CommandBundle: Map<string, Function> = new Map([
   [
     '배워',
     async (msg: Message, Cmdelement: string[]) => {
-      await learn(msg, Cmdelement);
+      await teach(msg, Cmdelement);
     },
   ],
   [
