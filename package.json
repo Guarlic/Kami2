@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --build",
-    "start": "tsc --build && node dist/index.js"
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",
