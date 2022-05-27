@@ -1,6 +1,6 @@
 /* eslint-disable no-async-promise-executor */
 import mongoose from 'mongoose';
-import { logger } from '../Utils/Logger.js';
+import logger from '../Utils/Logger.js';
 import { CmdClass, CmdModel } from './CmdSchema.js';
 import { UserClass, UserModel } from './UserSchema.js';
 
@@ -22,14 +22,14 @@ export function Connect() {
 /**
  *
  * @param userid 추가할 유저의 id
- * @returns 성공여부 boolean 값 리턴
+ * @returns 새 rseult 값
  */
 export const AddUser = (userid: string): Promise<boolean> =>
   new Promise<boolean>(async (resolve, reject) => {
     await UserModel.create({ id: userid } as UserClass)
       // eslint-disable-next-line
       .then(result => {
-        return true;
+        return result;
       })
       .catch(err => {
         reject(err);
@@ -117,6 +117,11 @@ export const FindUsersCmd = (
       });
   });
 
+/**
+ *
+ * @param _id 커맨드 Document 의 ObjectId 값
+ * @returns result 값
+ */
 export const FindCmdbyId = (_id: string): Promise<any> =>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new Promise<any>(async (resolve, reject) => {
@@ -135,19 +140,35 @@ export const FindCmdbyId = (_id: string): Promise<any> =>
   });
 
 // Promise로 교체 바람
-export async function FindUserData(userid: string) {
-  await UserModel.findOne({ id: userid })
-    .exec()
-    .then(async result => {
-      if (!result) {
-        await AddUser(userid);
-        logger.info(`New User added, id : ${userid}`);
-      }
-    })
-    .catch(err => {
-      logger.error(err);
-    });
-}
+// export async function FindUserData(userid: string) {
+//   await UserModel.findOne({ id: userid })
+//     .exec()
+//     .then(async result => {
+//       if (!result) {
+//         await AddUser(userid);
+//         logger.info(`New User added, id : ${userid}`);
+//       }
+//     })
+//     .catch(err => {
+//       logger.error(err);
+//     });
+// }
+
+export const FindUserData = (userid: string): Promise<any> =>
+  new Promise<any>(async (resolve, reject) => {
+    await UserModel.findOne({ id: userid })
+      .exec()
+      .then(async result => {
+        if (!result) {
+          logger.info(`New User added, id : ${userid}`);
+          return AddUser(userid);
+        }
+        return result;
+      })
+      .catch(err => {
+        logger.error(err);
+      });
+  });
 
 /**
  *

@@ -11,7 +11,7 @@ const client = BotEvent.client;
 client.once('ready', () => BotEvent.Start());
 
 client.on('messageCreate', async (msg: Message) => {
-  return BotEvent.MsgRecv(msg);
+  BotEvent.MsgRecv(msg);
 });
 
 client.login(process.env.TOKEN);

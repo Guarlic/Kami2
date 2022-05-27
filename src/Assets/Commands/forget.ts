@@ -6,7 +6,7 @@ import {
   MessageComponentInteraction,
 } from 'discord.js';
 import mongoose from 'mongoose';
-import { logger } from '../Utils/Logger.js';
+import logger from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
 
 /**
