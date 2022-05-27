@@ -14,7 +14,7 @@ const logFormat = printf(info => {
 // error: 0, warn: 1, info: 2, http: 3, verbose: 4, debug: 5, silly: 6
 
 // eslint-disable-next-line import/prefer-default-export
-export const logger = winston.createLogger({
+const logger = winston.createLogger({
   format: combine(
     timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
@@ -51,3 +51,5 @@ logger.add(
     ),
   }),
 );
+
+export default logger;

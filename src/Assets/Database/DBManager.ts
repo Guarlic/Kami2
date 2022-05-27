@@ -1,6 +1,6 @@
 /* eslint-disable no-async-promise-executor */
 import mongoose from 'mongoose';
-import { logger } from '../Utils/Logger.js';
+import logger from '../Utils/Logger.js';
 import { CmdClass, CmdModel } from './CmdSchema.js';
 import { UserClass, UserModel } from './UserSchema.js';
 

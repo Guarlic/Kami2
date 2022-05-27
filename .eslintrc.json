@@ -24,7 +24,6 @@
     "camelcase": 0,
     "global-require": 0,
     "import/no-dynamic-require": 0,
-    "no-console": 0,
     "no-trailing-spaces": 0,
     "no-plusplus": 0,
     "max-classes-per-file": 0,

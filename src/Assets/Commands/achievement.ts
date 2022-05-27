@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { logger } from '../Utils/Logger.js';
+import logger from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
 
 /**
