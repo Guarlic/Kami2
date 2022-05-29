@@ -31,7 +31,6 @@
     "no-unused-vars": 1,
     "import/extensions": 0,
     "import/no-unresolved": 0,
-    "prefer-destructuring": 0,
-    "no-async-promise-executor": 1
+    "prefer-destructuring": 0
   }
 }
