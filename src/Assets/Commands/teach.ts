@@ -33,7 +33,7 @@ async function execute(msg: Message, Cmdelement: string[]) {
   // 불건전한 내용 감지하기
   if (check(teachinfo) || check(teachkeyword)) {
     msg.reply(
-      'Korcen 라이브러리 검색 결과 유해 단어가 포함되어있는걸로 검사되었습니다. 의문점은 소작농 작업실에서 문의해주시기 바랍니다. ',
+      'Korcen 라이브러리 검색 결과 유해 단어가 포함되어있는걸로 검사되었습니다. 오류 리포트는 소작농 작업실에서 문의해주시기 바랍니다. ',
     );
     return;
   }

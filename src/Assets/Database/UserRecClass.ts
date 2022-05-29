@@ -1,69 +1,38 @@
-/* eslint-disable no-underscore-dangle */
+import logger from '../Utils/Logger.js';
+import { getPool } from '../Database/PostgreManager.js';
 
-class QuizClass {
-  public quizteachcount: number;
+export const AddTalk = (userid: string): Promise<boolean> =>
+  new Promise<boolean>(async (resolve, reject) => {
+    // 풀 연결
+    getPool()
+      .connect()
+      .then(async poolclient => {
+        // 데이터 없으면 생성
+        await poolclient.query(
+          `INSERT INTO talkcount VALUES ('${userid}',0) ON CONFLICT (userid) DO NOTHING;`,
+        );
 
-  public quizcorrectcount: number;
+        // 조회
+        const res2 = await poolclient.query(
+          `SELECT * FROM talkcount where userid='${userid}'`,
+        );
 
-  public quizwrongcount: number;
+        // 업데이트
+        await poolclient.query(
+          `UPDATE talkcount SET value = ${
+            res2.rows[0].value + 1
+          } WHERE userid='${userid}'`,
+        );
 
-  constructor(
-    quizteachcount: number,
-    quizcorrectcount: number,
-    quizwrongcount: number,
-  ) {
-    this.quizteachcount = quizteachcount;
-    this.quizcorrectcount = quizcorrectcount;
-    this.quizwrongcount = quizwrongcount;
-  }
-}
+        poolclient.release();
+      })
+      .catch(err => {
+        logger.error(`Error: ${err.stack}`);
+        reject(err);
+      })
+      .then(() => {
+        resolve(true);
+      });
+  });
 
-class GameClass {
-  public playcount: number;
-
-  public wincount: number;
-
-  public losecount: number;
-
-  constructor(playcount: number, wincount: number, losecount: number) {
-    this.playcount = playcount;
-    this.wincount = wincount;
-    this.losecount = losecount;
-  }
-}
-
-export default class UserRecClass {
-  protected _talkcount: number;
-
-  protected _teachcount: number;
-
-  protected _forgetcount: number;
-
-  protected _gamecount: GameClass;
-
-  protected _quizcount: QuizClass;
-
-  constructor(
-    talkcount: number,
-    teachcount: number,
-    forgetcount: number,
-    gamecount: GameClass,
-    quizcount: QuizClass,
-  ) {
-    this._talkcount = talkcount;
-    this._teachcount = teachcount;
-    this._forgetcount = forgetcount;
-    this._gamecount = gamecount;
-    this._quizcount = quizcount;
-  }
-
-  public static InitUserRec() {
-    return new UserRecClass(
-      0,
-      0,
-      0,
-      new GameClass(0, 0, 0),
-      new QuizClass(0, 0, 0),
-    );
-  }
-}
+export const imsibangpyeon = 0;
