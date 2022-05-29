@@ -9,11 +9,13 @@ import {
   EmbedFooterData,
   Interaction,
   EmbedAuthorData,
+  ActivityOptions,
 } from 'discord.js';
 import logger from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
 import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
+import { AddTalk } from '../Database/UserRecClass.js';
 
 const prefix = '테베야';
 
@@ -31,6 +33,27 @@ export const client = new Client({
 export async function Start() {
   logger.info(`Bot Start`);
   await DBManager.Connect();
+
+  const latency = client.ws.ping;
+
+  logger.info(`현재 연결된 클라이언트의 핑은 ${latency}ms 입니다.`);
+
+  // 유동 상테메세지
+  const activitylist: ActivityOptions[] = [
+    { name: `${latency}ms로 유저님의 말씀을 `, type: 'LISTENING' },
+    {
+      name: `${client.guilds.cache.size}개의 서버에서 함께 `,
+      type: 'PLAYING',
+    },
+    { name: `뉴꺠미야 안녕`, type: 'LISTENING' },
+  ];
+
+  // loop
+  setInterval(() => {
+    client.user?.setActivity(
+      activitylist[Math.floor(Math.random() * activitylist.length)],
+    );
+  }, 5000);
 }
 
 /**
@@ -60,11 +83,13 @@ export async function MsgRecv(msg: Message) {
   // 커맨드 번들안에 있는가?
   if (CommandBundle.has(Cmdelement[0])) {
     CommandBundle.get(Cmdelement[0])?.call(null, msg, Cmdelement);
+    AddTalk(msg.author.id);
     // 있으면 리턴
     return;
   }
 
   try {
+    // Db에서 Fetch 해오기
     const result = await DBManager.FindCmd(Cmdelement[0]);
 
     if (result[0] === null || result[0] === undefined) {
@@ -95,6 +120,10 @@ export async function MsgRecv(msg: Message) {
 
     // 답장
     msg.reply({ embeds: [embed] });
+
+    // 대화한 횟수 추가
+    await AddTalk(msg.author.id);
+    return;
   } catch (err) {
     logger.error(err);
     ErrorInMsgProcess(msg, err);
