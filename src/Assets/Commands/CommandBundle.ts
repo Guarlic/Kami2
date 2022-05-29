@@ -2,7 +2,7 @@
 import { Message } from 'discord.js';
 import teach from './teach.js';
 import forget from './forget.js';
-import achievement from './achievement.js';
+import talkcount from './TalkCount.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const CommandBundle: Map<string, Function> = new Map([
@@ -19,9 +19,9 @@ const CommandBundle: Map<string, Function> = new Map([
     },
   ],
   [
-    '도전과제',
+    '대화한횟수',
     async (msg: Message, Cmdelement: string[]) => {
-      await achievement(msg, Cmdelement);
+      await talkcount(msg, Cmdelement);
     },
   ],
 ]);

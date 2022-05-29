@@ -2,16 +2,16 @@
 import { Message } from 'discord.js';
 import * as dotenv from 'dotenv';
 import * as BotEvent from './Assets/BotEvent/BotEvent.js';
+import { Connect as PgConnect } from './Assets/Database/PostgreManager.js';
 
 // .env 로딩
 dotenv.config();
 
-const client = BotEvent.client;
+PgConnect();
+BotEvent.client.once('ready', () => BotEvent.Start());
 
-client.once('ready', () => BotEvent.Start());
-
-client.on('messageCreate', async (msg: Message) => {
+BotEvent.client.on('messageCreate', async (msg: Message) => {
   BotEvent.MsgRecv(msg);
 });
 
-client.login(process.env.TOKEN);
+BotEvent.client.login(process.env.TESTTOKEN);
