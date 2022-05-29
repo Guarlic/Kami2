@@ -3,20 +3,21 @@ import logger from '../Utils/Logger.js';
 
 const { Pool, Client } = pg;
 
-const config = {
-  connectionString:
-    'postgresql://hwwvkkximhiquc:9f3f4e252f12d855a243b999a2defec638e24c6e02438f790157f8cb4167d710@ec2-52-204-195-41.compute-1.amazonaws.com:5432/d60opoelqj6te7',
-  // Beware! The ssl object is overwritten when parsing the connectionString
-  ssl: {
-    rejectUnauthorized: false,
-  },
-};
-
 export const Connect = (): Promise<boolean> =>
   // eslint-disable-next-line no-async-promise-executor
   new Promise<boolean>(async (resolve, reject) => {
     try {
-      const client = new Client(config);
+      const clientconfig: pg.ClientConfig = {
+        connectionString: process.env.DATABASE_URL?.replace(
+          'postgres',
+          'postgresql',
+        ).concat('', '?sslmode=require'),
+        // Beware! The ssl object is overwritten when parsing the connectionString
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      };
+      const client = new Client(clientconfig);
 
       client.connect(err => {
         if (err) {
@@ -35,7 +36,20 @@ export const Connect = (): Promise<boolean> =>
     }
   });
 
-export const pool = new Pool(config);
+export function getPool() {
+  const poolconfig: pg.PoolConfig = {
+    connectionString: process.env.DATABASE_URL?.replace(
+      'postgres',
+      'postgresql',
+    ).concat('', '?sslmode=require'),
+    // Beware! The ssl object is overwritten when parsing the connectionString
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+
+  return new Pool(poolconfig);
+}
 
 /*
 pool

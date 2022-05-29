@@ -34,25 +34,27 @@ export async function Start() {
   logger.info(`Bot Start`);
   await DBManager.Connect();
 
-  const latency = client.ws.ping;
+  setTimeout(() => {
+    const latency = client.ws.ping;
 
-  logger.info(`현재 연결된 클라이언트의 핑은 ${latency}ms 입니다.`);
+    logger.info(`현재 연결된 클라이언트의 핑은 ${latency}ms 입니다.`);
 
-  // 유동 상테메세지
-  const activitylist: ActivityOptions[] = [
-    { name: `${latency}ms로 유저님의 말씀을 `, type: 'LISTENING' },
-    {
-      name: `${client.guilds.cache.size}개의 서버에서 함께 `,
-      type: 'PLAYING',
-    },
-    { name: `뉴꺠미야 안녕`, type: 'LISTENING' },
-  ];
+    // 유동 상테메세지
+    const activitylist: ActivityOptions[] = [
+      { name: `${latency}ms로 유저님의 말씀을 `, type: 'LISTENING' },
+      {
+        name: `${client.guilds.cache.size}개의 서버에서 함께 `,
+        type: 'PLAYING',
+      },
+      { name: `뉴꺠미야 안녕`, type: 'LISTENING' },
+    ];
 
-  // loop
-  setInterval(() => {
-    client.user?.setActivity(
-      activitylist[Math.floor(Math.random() * activitylist.length)],
-    );
+    // loop
+    setInterval(() => {
+      client.user?.setActivity(
+        activitylist[Math.floor(Math.random() * activitylist.length)],
+      );
+    }, 5000);
   }, 5000);
 }
 

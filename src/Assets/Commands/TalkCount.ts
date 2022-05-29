@@ -1,7 +1,7 @@
 import { Message, MessageEmbed, EmbedFooterData } from 'discord.js';
 import logger from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
-import { pool } from '../Database/PostgreManager.js';
+import { getPool } from '../Database/PostgreManager.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 
 /**
@@ -10,7 +10,7 @@ import EmbedConfig from '../Utils/EmbedConfig.js';
  * @param Cmdelement 메세지 엘러먼트 넘기셈
  */
 async function execute(msg: Message, Cmdelement: string[]) {
-  pool
+  getPool()
     .connect()
     .then(async poolclient => {
       // 데이터 없으면 생성

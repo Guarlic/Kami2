@@ -1,10 +1,10 @@
 import logger from '../Utils/Logger.js';
-import { pool } from './PostgreManager.js';
+import { getPool } from '../Database/PostgreManager.js';
 
 export const AddTalk = (userid: string): Promise<boolean> =>
   new Promise<boolean>(async (resolve, reject) => {
     // 풀 연결
-    pool
+    getPool()
       .connect()
       .then(async poolclient => {
         // 데이터 없으면 생성
