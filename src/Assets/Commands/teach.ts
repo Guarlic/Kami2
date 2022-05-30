@@ -2,6 +2,7 @@ import { Message } from 'discord.js';
 import logger from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
 import { check } from '../korcen/korcen.js';
+import { addTeach } from '../User/UserRecClass.js';
 
 /**
  * 배워 함수
@@ -48,6 +49,7 @@ async function execute(msg: Message, Cmdelement: string[]) {
     .then(async () => {
       // 답장
       await msg.reply(`커맨드 등록 성공! ${teachkeyword}`);
+      await addTeach(msg.author.id);
     })
     .catch(err => {
       // 에러

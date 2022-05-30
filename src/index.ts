@@ -14,4 +14,4 @@ BotEvent.client.on('messageCreate', async (msg: Message) => {
   BotEvent.MsgRecv(msg);
 });
 
-BotEvent.client.login(process.env.TOKEN);
+BotEvent.client.login(process.env.TESTTOKEN);
