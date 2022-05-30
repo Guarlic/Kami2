@@ -8,6 +8,7 @@ import {
 import mongoose from 'mongoose';
 import logger from '../Utils/Logger.js';
 import * as DBManager from '../Database/DBManager.js';
+import { addForget } from '../User/UserRecClass.js';
 
 /**
  * 잊어 함수
@@ -95,9 +96,8 @@ async function execute(msg: Message, Cmdelement: string[]) {
             new mongoose.Types.ObjectId(i.values[0]),
           ).then(() => {
             // 성공했음 메세지 보내기
-            msg.channel.send(`${Cmdelement[1]}를 삭제했어요!`).catch(err => {
-              logger.error(err);
-            });
+            msg.channel.send(`${Cmdelement[1]}를 삭제했어요!`);
+            addForget(msg.author.id);
           });
         });
       });

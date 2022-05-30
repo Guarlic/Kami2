@@ -28,7 +28,7 @@ export const Connect = (): Promise<boolean> =>
         }
       });
     } catch {
-      // eslint-disable-next-line no-unused-expressions
+      // eslint-disable-next-line
       (err: any) => {
         logger.error(err.stack);
         reject(err);
@@ -50,26 +50,3 @@ export function getPool() {
 
   return new Pool(poolconfig);
 }
-
-/*
-pool
-  .connect()
-  .then(async poolclient => {
-    logger.info('Pool connected');
-
-    poolclient
-      .query({
-        text: "SELECT * FROM talkcount where userid='780771337332981780'",
-      })
-      .then(res => {
-        poolclient.release();
-        logger.info(res.rows[0].value);
-      })
-      .catch(err => {
-        poolclient.release();
-        logger.error(`Query Error: ${err.stack}`);
-      });
-  })
-  .catch(err => logger.error(`Error Connecting: ${err.stack}`))
-  .then(() => pool.end());
-*/
