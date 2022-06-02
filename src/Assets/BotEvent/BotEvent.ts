@@ -43,8 +43,10 @@ export async function Start() {
   let activitylist: ActivityOptions[] = [];
 
   setInterval(() => {
+    // 핑 갱신하기
     latency = client.ws.ping;
 
+    // List 갱신
     activitylist = [
       { name: `${latency}ms로 유저님의 말씀을 `, type: 'LISTENING' },
       {
