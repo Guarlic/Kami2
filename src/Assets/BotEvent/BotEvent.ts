@@ -17,7 +17,7 @@ import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 import { addTalk } from '../User/UserRecClass.js';
 
-const prefix = '테베야';
+const prefix = '뉴꺠미야';
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -43,8 +43,10 @@ export async function Start() {
   let activitylist: ActivityOptions[] = [];
 
   setInterval(() => {
+    // 핑 갱신하기
     latency = client.ws.ping;
 
+    // List 갱신
     activitylist = [
       { name: `${latency}ms로 유저님의 말씀을 `, type: 'LISTENING' },
       {
