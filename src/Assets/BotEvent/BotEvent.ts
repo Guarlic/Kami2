@@ -17,7 +17,7 @@ import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 import { addTalk } from '../User/UserRecClass.js';
 
-const prefix = '테베야';
+const prefix = '뉴꺠미야';
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
