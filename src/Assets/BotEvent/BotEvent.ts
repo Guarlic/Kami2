@@ -17,7 +17,7 @@ import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 import { addTalk } from '../User/UserRecClass.js';
 
-const prefix = '뉴꺠미야';
+const prefix = '테베야';
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -93,10 +93,11 @@ export async function MsgRecv(msg: Message) {
   }
 
   // 커맨드 번들안에 있는가?
-  if (CommandBundle.has(Cmdelement[0])) {
-    CommandBundle.get(Cmdelement[0])?.call(null, msg, Cmdelement);
+  const command = CommandBundle.find(value => value.name === Cmdelement[0]);
+
+  if (command) {
+    command.execute(msg, Cmdelement);
     addTalk(msg.author.id);
-    // 있으면 리턴
     return;
   }
 

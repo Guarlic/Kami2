@@ -21,7 +21,6 @@
   "rules": {
     "class-methods-use-this": 0,
     "linebreak-style": 0,
-    "camelcase": 0,
     "global-require": 0,
     "import/no-dynamic-require": 0,
     "no-trailing-spaces": 0,
