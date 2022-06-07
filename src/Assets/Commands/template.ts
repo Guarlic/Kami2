@@ -1,8 +1,13 @@
 import { Message } from 'discord.js';
 import logger from '../Utils/Logger.js';
+import ICommand from '../Interfaces/ICommand.js';
 
-async function execute(msg: Message, Cmdelement: string[]) {
-  // blablablablabl
-}
+const command: ICommand = {
+  name: 'Template',
+  description: 'Template',
+  execute: async (msg: Message, Cmdelement: string[]) => {
+    msg.reply('Template');
+  },
+};
 
-export default execute;
+export default command;

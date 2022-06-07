@@ -93,10 +93,11 @@ export async function MsgRecv(msg: Message) {
   }
 
   // 커맨드 번들안에 있는가?
-  if (CommandBundle.has(Cmdelement[0])) {
-    CommandBundle.get(Cmdelement[0])?.call(null, msg, Cmdelement);
+  const command = CommandBundle.find(value => value.name === Cmdelement[0]);
+
+  if (command) {
+    command.execute(msg, Cmdelement);
     addTalk(msg.author.id);
-    // 있으면 리턴
     return;
   }
 
