@@ -5,7 +5,7 @@ import EmbedConfig from '../Utils/EmbedConfig.js';
 import ICommand from '../Interfaces/ICommand.js';
 
 const command: ICommand = {
-  name: '가르친 횟수',
+  name: '가르친횟수',
   description:
     '유저님이 꺠미에게 지식을 가르쳐주신 횟수에요! 앞으로도 더 많이 가르쳐주세요! 꺠미는 지식에 언제나 목마르니까욧!',
   execute: async (msg: Message, Cmdelement: string[]) => {
