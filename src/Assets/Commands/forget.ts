@@ -97,6 +97,8 @@ const command: ICommand = {
             ).then(() => {
               // 성공했음 메세지 보내기
               msg.channel.send(`${Cmdelement[1]}를 삭제했어요!`);
+
+              // 횟수 추가
               addForget(msg.author.id);
             });
           });
