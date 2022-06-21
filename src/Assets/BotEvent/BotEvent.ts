@@ -76,7 +76,11 @@ export async function MsgRecv(msg: Message) {
   }
 
   // 메세지 감지
-  logger.info(`MsgRecv by ${msg.author.username}: ${msg.content}`);
+  logger.info(
+    `MsgRecv by ${msg.author.username} from ${
+      msg.guild ? msg.guild?.name : 'null'
+    }: ${msg.content}`,
+  );
 
   // prefix로 시작 안하면 리턴
   if (!msg.content.startsWith(prefix)) {
