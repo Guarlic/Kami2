@@ -8,6 +8,7 @@ import ping from './ping.js';
 import teachCount from './teachCount.js';
 import forgetCount from './forgetCount.js';
 import cmdCount from './cmdCount.js';
+import sysChannel from './SystemChannel.js';
 
 const CommandBundle: ICommand[] = [
   teach,
@@ -17,6 +18,7 @@ const CommandBundle: ICommand[] = [
   teachCount,
   forgetCount,
   cmdCount,
+  sysChannel,
 ];
 
 export default CommandBundle;

@@ -14,4 +14,10 @@ BotEvent.client.on('messageCreate', async (msg: Message) => {
   BotEvent.MsgRecv(msg);
 });
 
-BotEvent.client.login(process.env.TOKEN);
+// 프로덕션 모드이면 뉴꺠미 토큰 사용
+if (process.env.NODE_ENV === 'production') {
+  BotEvent.client.login(process.env.TOKEN);
+} // 아니면 테스트토큰 사용
+else {
+  BotEvent.client.login(process.env.TESTTOKEN);
+}

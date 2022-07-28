@@ -25,16 +25,14 @@ const command: ICommand = {
         poolclient.release();
 
         // 임베드 생성
-        const footerdata: EmbedFooterData = {
-          text: '앞으로도 많이 잊게 하지는 마세요!',
-        };
-
         const embed = new MessageEmbed()
           .setColor(EmbedConfig.color)
           .setTitle(`${msg.author.username}님이 잊게한 횟수`)
           .setAuthor(EmbedConfig.author)
           .setDescription(`${res2.rows[0].value}번`)
-          .setFooter(footerdata);
+          .setFooter({
+            text: '앞으로도 많이 잊게 하지는 마세요!',
+          } as EmbedFooterData);
 
         // 답장
         msg.reply({ embeds: [embed] });

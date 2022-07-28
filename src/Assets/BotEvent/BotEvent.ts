@@ -17,7 +17,7 @@ import CommandBundle from '../Commands/CommandBundle.js';
 import EmbedConfig from '../Utils/EmbedConfig.js';
 import { addTalk } from '../User/UserRecClass.js';
 
-const prefix = '뉴꺠미야';
+let prefix = process.env.PREFIX || '뉴꺠미야';
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -37,6 +37,9 @@ export async function Start() {
   let latency = client.ws.ping;
 
   logger.info(`현재 연결된 클라이언트의 핑은 ${latency}ms 입니다.`);
+
+  // 접두사 지정
+  prefix = process.env.PREFIX || '뉴꺠미야';
 
   // 유동 상테메세지
 
@@ -73,7 +76,11 @@ export async function MsgRecv(msg: Message) {
   }
 
   // 메세지 감지
-  logger.info(`MsgRecv by ${msg.author.username}: ${msg.content}`);
+  logger.info(
+    `MsgRecv by ${msg.author.username} from ${
+      msg.guild ? msg.guild?.name : 'null'
+    }: ${msg.content}`,
+  );
 
   // prefix로 시작 안하면 리턴
   if (!msg.content.startsWith(prefix)) {
